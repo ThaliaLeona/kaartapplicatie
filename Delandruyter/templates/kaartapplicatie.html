@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+<title>KAARTAPPLICATIE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Abadi', sans-serif;
+  color: #0c0c0c;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Style the header */
+header {
+  background-color: #f2f2f2;
+  padding: 30px;
+  border: 4px solid black;
+  text-align: center;
+  font-size: 35px;
+  color: ##6F6F6F;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #f2f2f2;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h2>KAARTAPPLICATIE</h2>
+</header>
+
+<section>
+  <nav>
+    <form action="{{ url_for('index') }}" method="POST">
+        <label for="input_address">Adres:</label>
+        <input type="text" id="input_address" name="input_address" placeholder="thuisadres" required>
+        <br><br>
+
+        <label for="tags-level">Onderwijsniveau:</label>
+        <select id="tags-level" name="tags-level" required>
+            <option value="">Selecteer onderwijsniveau</option>
+            {% for category in categories %}
+                <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="input_gemeente">Gemeente:</label>
+        <select id="input_gemeente" name="input_gemeente" required>
+            <option value="">Selecteer gemeente</option>
+            {% for gemeente in gemeentes %}
+                <option value="{{ gemeente }}">{{ gemeente }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+      <button type="submit">Zoeken</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+  </nav>
+  
+  <article>
+    <img src="img_girl.jpg" style="max-width:100%;height:auto;"> </p>
+  </article>
+</section>
+
+<footer>
+  <p>Footer</p>
+</footer>
+
+</body>
+</html>
+

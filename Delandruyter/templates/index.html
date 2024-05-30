@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kaartweergave</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+</head>
+<body>
+    <form method="POST">
+        <input type="text" name="address" placeholder="Uw adres">
+        <button type="submit">Show Map</button>
+    </form>
+    <div id="map" style="height: 400px;"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const mapDiv = document.getElementById('map');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+            const address = document.querySelector('[name="address"]').value;
+
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address: address }) 
+            })
+            .then(response => response.text()) 
+            .then(mapHtml => {
+                mapDiv.innerHTML = mapHtml; 
+            });
+        });
+    </script>
+</body>
+</html>
